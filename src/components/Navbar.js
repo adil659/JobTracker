@@ -21,28 +21,30 @@ const Navbar = ({ applications }) => {
         <div>
 
             <Nav
-                activeKey="/home"
+                
                 id="navbar"
             >
                 <Nav.Item>
-                    <Nav.Link href="/home">Active</Nav.Link>
+                    <Nav.Link href="/">Active</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/createJob" eventKey="link-1" onSelect={handleCreateJob}>Create Job Post</Nav.Link>
+                    <Nav.Link href="/createjob">Create Job Post</Nav.Link>
                 </Nav.Item>
+                
             </Nav>
 
             <Router>
 
                 <Switch>
-                    <Route path="/home">
-                    <Content applications={applications}></Content>
-                    </Route>
-                    <Route path="/createJob">
+                    
+                    <Route path="/createjob">
                         <AddJobApplication />
                     </Route>
                     <Route path="/applications/:id">
                     <JobApplicationDetails></JobApplicationDetails>
+                    </Route>
+                    <Route path="/">
+                    <Content applications={applications}></Content>
                     </Route>
                 </Switch>
 
