@@ -19,37 +19,48 @@ const Navbar = ({ applications }) => {
 
     return (
         <div>
+            <Nav id="navbar" className="">
+                <Container fluid className="p-0 ">
 
-            <Nav
-                
-                id="navbar"
-            >
-                <Nav.Item>
-                    <Nav.Link href="/">Active</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="/createjob">Create Job Post</Nav.Link>
-                </Nav.Item>
-                
+                    <Row className="">
+                        <Col className=" d-flex">
+                            <Nav.Item>
+                                <Nav.Link href="/">Active</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/createjob">Create Job Post</Nav.Link>
+                            </Nav.Item>
+                        </Col>
+
+                        <Col className="mr-5">
+                            <Row className="justify-content-end">
+                                <a className="btn btn-danger" onClick={() => alert('hello')}>Sign in</a>
+                                <a className="btn btn-warning" onClick={() => alert('ok i see u!')}>Sign up</a>
+                            </Row>
+
+                        </Col>
+                    </Row>
+                </Container>
             </Nav>
+
 
             <Router>
 
                 <Switch>
-                    
+
                     <Route path="/createjob">
                         <AddJobApplication />
                     </Route>
                     <Route path="/applications/:id">
-                    <JobApplicationDetails></JobApplicationDetails>
+                        <JobApplicationDetails></JobApplicationDetails>
                     </Route>
                     <Route path="/">
-                    <Content applications={applications}></Content>
+                        <Content applications={applications}></Content>
                     </Route>
                 </Switch>
 
             </Router>
-            
+
 
 
         </div>
