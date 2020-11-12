@@ -1,37 +1,23 @@
-import { Button, Nav, Container, Row, Col,  } from 'react-bootstrap';
+import { Button, Nav, Container, Row, Col } from 'react-bootstrap';
 import React from 'react'
-import JobApplication from './JobApplication';
+import SideBar from './Sidebar'
+import JobsList from './JobsList'
+import './Content.css'
 
 
-const Content = ({applications}) => {
+const Content = ({ applications }) => {
 
-    return (
-        <div>
-            <Container fluid className="content__container">
-          <Row>
+  return (
+    <div className='content'>
+      <Container fluid className="content__container">
+        <Row>
+          <SideBar></SideBar>
+          <JobsList applications={applications}></JobsList>
+        </Row>
 
-            <Col xs={3} id="side__navbar" className="justify-content-md-stretch content__col">
-              
-                <h6 className="list_item">Click me!</h6>
-                <h6 className="list_item">Click me!</h6>
-                <h6 className="list_item">Click me!</h6>
-                <h6 className="list_item">Click me!</h6>
-                <h6 className="list_item">Click me!</h6>
-              
-            </Col>
-
-            <Col className="content__col">
-              <Row className="content__row">
-                <h1>Keep track of all your resumes! 🚀</h1>
-              </Row>
-              <JobApplication applications={applications} ></JobApplication>
-            </Col>
-
-          </Row>
-
-        </Container>
-        </div>
-    )
+      </Container>
+    </div>
+  )
 }
 
 export default Content

@@ -1,0 +1,32 @@
+.header{
+    background-color: lightgray;
+    border: 1px solid black;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+}
+
+.header__content{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.header__menu{
+    display: flex;
+    align-items: center;
+}
+
+.header__authentication{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navbar {
+    padding: 20px 0;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+}
+

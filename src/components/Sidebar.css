@@ -1,0 +1,34 @@
+.sideBar {
+    min-height: 100vh; 
+    padding: 10px;
+    margin: 0px;
+    border-right: 1px solid black;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.folder_item{
+    border: 1px solid black;
+    background-color: white !important;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+}
+
+.folder_item > h5 {
+    color: black !important
+}
+
+.add_folder_button{
+    margin-top: 5px !important;
+    width: 80%;
+    background-color: lightgray !important;
+}
+
+.add_folder_button > h3{
+    color: black;
+}

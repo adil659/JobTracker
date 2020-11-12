@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Button, Nav, Container, Row, Col, } from 'react-bootstrap';
-import Navbar from './components/Navbar'
-import axios from 'axios';
+import Header from './components/Header'
 import { useSelector, useDispatch } from 'react-redux'
-import { initApplications, createApplication, fireBaseGetApplications } from './reducers/applicationReducer'
+import { fireBaseGetApplications } from './reducers/applicationReducer'
 import { db, auth } from './firebase'
-
-
-
-
+import AddJobApplication from './components/AddJobApplication';
+import JobApplicationDetails from './components/JobApplicationDetails';
+import Content from './components/Content'
+import { currentUser } from './reducers/userReducer'
+import {
+  BrowserRouter as Router,
+  Switch, Route
+} from "react-router-dom"
 
 
 function App() {
@@ -32,8 +34,7 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         console.log(authUser)
-        setUser(authUser)
-
+        dispatch(currentUser(authUser))
       } else {
         setUsername(null)
       }
@@ -55,27 +56,23 @@ function App() {
   }, [])
 
 
-  const signUp = (event) => {
-    event.preventDefault()
-
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        return authUser.user.updateProfile({
-          displayName: username
-        })
-      })
-      .catch((error) => alert(error.message))
-
-    setOpen(false)
-
-  }
   return (
     <div className="App">
 
-      <header className="App-header">
-      </header>
-
-      <Navbar applications={applications}></Navbar>
+      <Header applications={applications}></Header>
+      <Router>
+        <Switch>
+          <Route path="/createjob">
+            <AddJobApplication />
+          </Route>
+          <Route path="/applications/:id">
+            <JobApplicationDetails></JobApplicationDetails>
+          </Route>
+          <Route path="/">
+            <Content applications={applications}></Content>
+          </Route>
+        </Switch>
+      </Router>
 
     </div>
   );
