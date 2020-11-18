@@ -6,7 +6,6 @@ const reducer = (state = null, action) => {
 
     switch (action.type) {
         case 'SET_CURRENT_USER':
-            console.log(`setting user in reducer`)
             return action.data.authUser
         case 'LOGOUT':
             return null

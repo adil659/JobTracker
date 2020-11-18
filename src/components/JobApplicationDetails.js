@@ -18,7 +18,6 @@ const JobApplicationDetails = () => {
 
     const id = useParams().id
     const application = applications.find((application) => application.id == id)
-    console.log('application', application)
 
     const handleApplied =  (event) => {
         const updatedApplication = {

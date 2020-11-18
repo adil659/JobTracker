@@ -19,9 +19,9 @@ const Header = ({ applications }) => {
     const signUpModalControls = useModal()
     
     const authUser = useSelector(state => state.authUser)
-    console.log(`current user in header: ${authUser}`)
+    
     const handleCreateJob = (eventKey, event) => {
-        console.log(eventKey)
+        event.preventDefault()
         setActivePage('AddJobApplication')
     }
 

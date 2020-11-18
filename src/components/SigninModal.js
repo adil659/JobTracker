@@ -16,11 +16,8 @@ function SigninModal({ controls }) {
 
     const signIn = (event) => {
         event.preventDefault()
-        console.log('signing in')
         auth.signInWithEmailAndPassword(email.value, password.value)
         .then((res) => {
-            console.log(`signedin: ${res}`)
-            console.log(res)
             dispatch(setCurrentUser(res.user))
         })
           .catch((error) => alert(error.message))

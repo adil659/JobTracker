@@ -7,7 +7,7 @@ import { db, auth } from './firebase'
 import AddJobApplication from './components/AddJobApplication';
 import JobApplicationDetails from './components/JobApplicationDetails';
 import Content from './components/Content'
-import { currentUser } from './reducers/userReducer'
+import { setCurrentUser, signOutUser } from './reducers/userReducer'
 import {
   BrowserRouter as Router,
   Switch, Route
@@ -16,36 +16,39 @@ import {
 
 function App() {
   const dispatch = useDispatch()
-  
-  
+  const user = useSelector(state => state.authUser)
+
   // useEffect(() => {
   //     dispatch(initApplications())
   // }, [])
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
-  //     if (authUser) {
-  //       console.log(authUser)
-  //       dispatch(currentUser(authUser))
-  //     } else {
-  //       setUsername(null)
-  //     }
-  //   })
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(setCurrentUser(authUser))
+      } else {
+        signOutUser(null)
+      }
+    })
 
-  //   return () => {
-  //     unsubscribe()
-  //   }
-  // }, [user, username])
+    return () => {
+      unsubscribe()
+    }
+  }, [user])
 
   useEffect(() => {
-    db.collection('jobs').onSnapshot(snapshot => {
-      console.log('snap: ', snapshot.docs)
-      dispatch(fireBaseGetApplications(snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))))
-    })
-  }, [])
+    if (user) {
+      db.collection('jobs').onSnapshot(snapshot => {
+        dispatch(fireBaseGetApplications(snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })).filter((item) => {
+          return item.user_id === user?.uid
+        })
+        ))
+      })
+    }
+  }, [user])
 
 
   return (
