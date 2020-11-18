@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Button, Nav, Container, Row, Col, Modal } from 'react-bootstrap';
 import { auth } from '../firebase'
 import {useField } from '../hooks/hooks'
+import {useDispatch} from 'react-redux'
+import {setCurrentUser} from '../reducers/userReducer'
 
 function SigninModal({ controls }) {
 
     const { show, closeModal, showModal } = controls;
+    const dispatch = useDispatch()
 
     const email = useField('text')
     const password = useField('password')
@@ -15,6 +18,11 @@ function SigninModal({ controls }) {
         event.preventDefault()
         console.log('signing in')
         auth.signInWithEmailAndPassword(email.value, password.value)
+        .then((res) => {
+            console.log(`signedin: ${res}`)
+            console.log(res)
+            dispatch(setCurrentUser(res.user))
+        })
           .catch((error) => alert(error.message))
 
         closeModal()

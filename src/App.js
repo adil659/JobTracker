@@ -16,34 +16,26 @@ import {
 
 function App() {
   const dispatch = useDispatch()
-
-  const baseUrl = 'http://localhost:3001'
-  const [applications, setApplications] = useState([])
-  const [email, setEmail] = useState('');
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null)
-  const [open, setOpen] = useState(false)
-
+  
+  
   // useEffect(() => {
   //     dispatch(initApplications())
   // }, [])
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        console.log(authUser)
-        dispatch(currentUser(authUser))
-      } else {
-        setUsername(null)
-      }
-    })
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
+  //     if (authUser) {
+  //       console.log(authUser)
+  //       dispatch(currentUser(authUser))
+  //     } else {
+  //       setUsername(null)
+  //     }
+  //   })
 
-    return () => {
-      unsubscribe()
-    }
-  }, [user, username])
+  //   return () => {
+  //     unsubscribe()
+  //   }
+  // }, [user, username])
 
   useEffect(() => {
     db.collection('jobs').onSnapshot(snapshot => {
@@ -59,7 +51,7 @@ function App() {
   return (
     <div className="App">
 
-      <Header applications={applications}></Header>
+      <Header ></Header>
       <Router>
         <Switch>
           <Route path="/createjob">
@@ -69,7 +61,7 @@ function App() {
             <JobApplicationDetails></JobApplicationDetails>
           </Route>
           <Route path="/">
-            <Content applications={applications}></Content>
+            <Content ></Content>
           </Route>
         </Switch>
       </Router>

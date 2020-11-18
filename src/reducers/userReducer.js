@@ -2,10 +2,10 @@ import firebase from 'firebase'
 import { db } from '../firebase'
 
 
-const reducer = (state = [], action) => {
+const reducer = (state = null, action) => {
 
     switch (action.type) {
-        case 'CURRENT_USER':
+        case 'SET_CURRENT_USER':
             console.log(`setting user in reducer`)
             return action.data.authUser
         case 'LOGOUT':
@@ -15,10 +15,10 @@ const reducer = (state = [], action) => {
     }
 }
 
-export const currentUser = (authUser) => {
+export const setCurrentUser = (authUser) => {
     return async dispatch => {
         dispatch({
-            type: 'CURRENT_USER',
+            type: 'SET_CURRENT_USER',
             data: {
                 authUser
             }
