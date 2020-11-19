@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import { Nav, Container, Row, Col } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import SignInModal from './SigninModal'
@@ -13,17 +13,17 @@ import './Header.css'
 
 const Header = ({ applications }) => {
     const dispatch = useDispatch()
-    const [activePage, setActivePage] = useState('')
+    //const [activePage, setActivePage] = useState('')
 
     const signInModalControls = useModal()
     const signUpModalControls = useModal()
     
     const authUser = useSelector(state => state.authUser)
-    
-    const handleCreateJob = (eventKey, event) => {
-        event.preventDefault()
-        setActivePage('AddJobApplication')
-    }
+
+    // const handleCreateJob = (eventKey, event) => {
+    //     event.preventDefault()
+    //     //setActivePage('AddJobApplication')
+    // }
 
     const logout = () => {
         auth.signOut();
@@ -50,7 +50,7 @@ const Header = ({ applications }) => {
                                 {!authUser ? 
                                 (<>
                                 <Button className="btn btn-danger" onClick={signInModalControls.showModal}>Sign in</Button>
-                                <a className="btn btn-warning" onClick={signUpModalControls.showModal}>Sign up</a></>)
+                                <Button className="btn btn-warning" onClick={signUpModalControls.showModal}>Sign up</Button></>)
                                 :
                                 (<><Button className="btn btn-danger" onClick={logout}>Logout</Button></>)
                                 }

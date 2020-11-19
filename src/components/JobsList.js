@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Nav, Container, Row, Col  } from 'react-bootstrap';
+import { Row, Col  } from 'react-bootstrap';
 import JobApplication from './JobApplication';
 import './JobsList.css'
 
@@ -8,7 +8,7 @@ function JobsList({applications}) {
         <div className="jobsList">
             <Col className="jobsList__col">
                 <Row className="jobsList__row">
-                    <h1>Keep track of all your resumes! 🚀</h1>
+                    <h1>Keep track of all your resumes! <span role="img" aria-label="rocket">🚀</span></h1>
                 </Row>
                 <JobApplication applications={applications} ></JobApplication>
             </Col>

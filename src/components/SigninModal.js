@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Nav, Container, Row, Col, Modal } from 'react-bootstrap';
+import React from 'react'
+import { Button, Row, Modal } from 'react-bootstrap';
 import { auth } from '../firebase'
 import {useField } from '../hooks/hooks'
 import {useDispatch} from 'react-redux'
@@ -7,7 +7,7 @@ import {setCurrentUser} from '../reducers/userReducer'
 
 function SigninModal({ controls }) {
 
-    const { show, closeModal, showModal } = controls;
+    const { show, closeModal } = controls;
     const dispatch = useDispatch()
 
     const email = useField('text')

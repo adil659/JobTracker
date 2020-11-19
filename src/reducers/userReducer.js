@@ -1,6 +1,3 @@
-import firebase from 'firebase'
-import { db } from '../firebase'
-
 
 const reducer = (state = null, action) => {
 

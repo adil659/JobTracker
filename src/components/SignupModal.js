@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { Button, Nav, Container, Row, Col, Modal } from 'react-bootstrap';
+import React, {  } from 'react'
+import { Button, Row, Modal } from 'react-bootstrap';
 import { auth } from '../firebase'
 import {useField } from '../hooks/hooks'
 
 function SignupModal({ controls }) {
 
-    const { show, closeModal, showModal } = controls;
+    const { show, closeModal} = controls;
 
     const email = useField('text')
     const password = useField('password')

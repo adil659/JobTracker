@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Header from './components/Header'
 import { useSelector, useDispatch } from 'react-redux'
@@ -34,7 +34,7 @@ function App() {
     return () => {
       unsubscribe()
     }
-  }, [user])
+  }, [user, dispatch]);
 
   useEffect(() => {
     if (user) {
@@ -48,7 +48,7 @@ function App() {
         ))
       })
     }
-  }, [user])
+  }, [user, dispatch])
 
 
   return (

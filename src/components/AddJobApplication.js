@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
 import { createApplication, createLocalApplication } from '../reducers/applicationReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
 import {
     // ...
-    useParams,
     useHistory
 } from "react-router-dom"
 
@@ -45,7 +43,7 @@ const AddJobApplication = () => {
         <div>
 
             <Container>
-                <h1>NICE keep applying, you got this! 🔥🔥</h1>
+                <h1>NICE keep applying, you got this! <span role="img" aria-label="flames">🔥🔥</span></h1>
 
                 <Form onSubmit={createJob}>
                     <Form.Group controlId="exampleForm.ControlInput1">

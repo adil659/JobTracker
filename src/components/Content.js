@@ -1,4 +1,4 @@
-import { Button, Nav, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import React from 'react'
 import SideBar from './Sidebar'
 import JobsList from './JobsList'

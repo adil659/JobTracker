@@ -13,10 +13,10 @@ const reducer = (state = [], action) => {
         case 'CREATE_LOCAL_APPLICATION':
             return state.concat(action.data.application)
         case 'UPDATE_APPLICATION':
-            const newState = state.map((application) => action.data.id != application.id ? application : action.data.updatedApplication)
+            const newState = state.map((application) => action.data.id !== application.id ? application : action.data.updatedApplication)
             return newState
         case 'DELETE_APPLICATION':
-            const newStateDelete = state.filter((application) => application.id != action.data.id)
+            const newStateDelete = state.filter((application) => application.id !== action.data.id)
             return newStateDelete
         default:
             return state
