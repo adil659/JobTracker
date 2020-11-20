@@ -7,7 +7,7 @@ import { useModal } from '../hooks/hooks'
 import { auth } from '../firebase'
 import { useSelector, useDispatch } from 'react-redux'
 import {signOutUser} from '../reducers/userReducer'
-
+import {clearApplications} from '../reducers/applicationReducer'
 import './Header.css'
 
 
@@ -26,8 +26,9 @@ const Header = ({ applications }) => {
     // }
 
     const logout = () => {
-        auth.signOut();
+        auth.signOut()
         dispatch(signOutUser())
+        dispatch(clearApplications())
     }
 
     return (

@@ -18,6 +18,8 @@ const reducer = (state = [], action) => {
         case 'DELETE_APPLICATION':
             const newStateDelete = state.filter((application) => application.id !== action.data.id)
             return newStateDelete
+        case 'CLEAR_APPLICATIONS':
+            return []
         default:
             return state
     }
@@ -46,10 +48,10 @@ export const fireBaseGetApplications = (applications) => {
     }
 }
 
-export const createApplication = (application) => {
+export const createApplication = (userId, application) => {
     return async dispatch => {
         //const addedApplication = await applicationService.create(application)
-        db.collection('jobs').add({
+        db.collection('users').doc(userId).collection('jobs').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             ...application
         })
@@ -75,32 +77,42 @@ export const createLocalApplication = (application) => {
     }
 }
 
-export const updateApplication = (id, applicationObject) => {
+export const updateApplication = (userId, appId, applicationObject) => {
     return async dispatch => {
         //const updatedApplication = await applicationService.update(id, applicationObject)
-        db.collection('jobs').doc(`/${id}`).set(applicationObject)
+        db.collection('users').doc(userId).collection('jobs').doc(`/${appId}`).set(applicationObject)
         const updatedApplication = {}
         dispatch({
             type: 'UPDATEe_APPLICATION',
             data: {
-                id,
+                appId,
                 updatedApplication
             }
         })
     }
 }
 
-export const removeApplication = (id) => {
+export const removeApplication = (userId, appId) => {
     return async dispatch => {
         //const deletedApplication = await applicationService.deleteApplication(id)
-        db.collection('jobs').doc(`/${id}`).delete()
-        const deletedApplication = {}
+        db.collection('users').doc(userId).collection('jobs').doc(`/${appId}`).delete()
+        //const deletedApplication = {}
         dispatch({
             type: 'DELETE_APPLICATION',
             data: {
-                deletedApplication,
-                id
+                appId
             }
+        })
+    }
+}
+
+export const clearApplications = () => {
+    return async dispatch => {
+        //const deletedApplication = await applicationService.deleteApplication(id)
+        //const deletedApplication = {}
+        console.log('clearing apps')
+        dispatch({
+            type: 'CLEAR_APPLICATIONS'
         })
     }
 }

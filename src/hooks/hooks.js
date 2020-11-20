@@ -6,7 +6,6 @@ export const useModal = () => {
 
     return {
         show,
-        setShow,
         closeModal,
         showModal
     }

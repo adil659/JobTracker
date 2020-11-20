@@ -13,6 +13,7 @@ import { Button, Container } from 'react-bootstrap'
 
 const JobApplicationDetails = () => {
     const applications = useSelector(state => state.applications)
+    const user = useSelector(state => state.authUser)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -24,7 +25,7 @@ const JobApplicationDetails = () => {
             ...application,
             applied: !application.applied
         }
-        dispatch(updateApplication(id, updatedApplication))
+        dispatch(updateApplication(user?.uid, id, updatedApplication))
     }
 
     const handleDelete = (event) => {

@@ -18,16 +18,12 @@ function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.authUser)
 
-  // useEffect(() => {
-  //     dispatch(initApplications())
-  // }, [])
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(setCurrentUser(authUser))
       } else {
-        signOutUser(null)
+        signOutUser()
       }
     })
 
@@ -37,17 +33,23 @@ function App() {
   }, [user, dispatch]);
 
   useEffect(() => {
-    if (user) {
-      db.collection('jobs').onSnapshot(snapshot => {
-        dispatch(fireBaseGetApplications(snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })).filter((item) => {
-          return item.user_id === user?.uid
+    if (user != null) {
+      console.log(user)
+      const unsubscribe = db.collection('users')
+        .doc(user?.uid)
+        .collection('jobs')
+        .onSnapshot((snapshot) => {
+          dispatch(fireBaseGetApplications(snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }))
+          ))
         })
-        ))
-      })
+        return () => {
+          unsubscribe()
+        }
     }
+    
   }, [user, dispatch])
 
 

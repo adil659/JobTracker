@@ -25,12 +25,11 @@ const AddJobApplication = () => {
             company,
             link,
             description,
-            applied: false,
-            user_id: user?.uid
+            applied: false
         }
 
         if (user) {
-            dispatch(createApplication(newObject))
+            dispatch(createApplication(user?.uid, newObject))
         }
         else {
             dispatch(createLocalApplication(newObject))

@@ -25,7 +25,7 @@ function SigninModal({ controls }) {
         closeModal()
     }
     return (
-        <>
+        <div>
             <Modal show={show} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign in</Modal.Title>
@@ -56,7 +56,7 @@ function SigninModal({ controls }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+        </div>
     )
 }
 
