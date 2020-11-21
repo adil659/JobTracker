@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, Row, Modal } from 'react-bootstrap';
 import { auth } from '../firebase'
-import {useField } from '../hooks/hooks'
-import {useDispatch} from 'react-redux'
-import {setCurrentUser} from '../reducers/userReducer'
+import { useField } from '../hooks/hooks'
+import { useDispatch } from 'react-redux'
+import { setCurrentUser } from '../reducers/userReducer'
 
 function SigninModal({ controls }) {
 
@@ -14,48 +14,57 @@ function SigninModal({ controls }) {
     const password = useField('password')
 
 
-    const signIn = (event) => {
-        event.preventDefault()
+    const signIn = () => {
         auth.signInWithEmailAndPassword(email.value, password.value)
-        .then((res) => {
-            dispatch(setCurrentUser(res.user))
-        })
-          .catch((error) => alert(error.message))
+            .then((res) => {
+                dispatch(setCurrentUser(res.user))
+                email.setValue('')
+                password.setValue('')
+                closeModal()
+            })
+            .catch((error) => alert(error.message))
+    }
 
-        closeModal()
+    const keyPressed = (event) => {
+        console.log(event.charCode)
+        if(event.charCode === 13) {
+            signIn()
+        }
     }
     return (
-        <div>
-            <Modal show={show} onHide={closeModal}>
+        <div onKeyPress={keyPressed}>
+
+            <Modal show={show} onHide={closeModal}  autoFocus={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign in</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row >
                         <h5 className="col-3  pl-2 mr-3">Email</h5>
-                        <input type={email.type} 
-                        placeholder="email"
-                        onChange={email.onChange}
-                        value={email.value} />
+                        <input type={email.type}
+                            placeholder="email"
+                            onChange={email.onChange}
+                            value={email.value} />
                     </Row>
                     <Row className="mt-2">
                         <h5 className="col-3  pl-2 mr-3 mt-2">Password</h5>
-                        <input type={password.type} 
-                        placeholder="password"
-                        onChange={password.onChange}
-                        value={password.value} />
+                        <input type={password.type}
+                            placeholder="password"
+                            onChange={password.onChange}
+                            value={password.value} />
                     </Row>
 
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={closeModal}>
-                        Close
+                <Modal.Footer >
+                        <Button variant="secondary" onClick={closeModal}>
+                            Close
                     </Button>
-                    <Button type="submit" variant="primary" onClick={signIn}>
-                        Login
+                        <Button type="submit" variant="primary" onClick={signIn}>
+                            Login
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     )
 }
