@@ -15,6 +15,7 @@ const AddJobApplication = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(state => state.authUser)
+    const activeFolder = useSelector(state => state.activeFolder)
 
 
     const createJob = (event) => {
@@ -29,7 +30,7 @@ const AddJobApplication = () => {
         }
 
         if (user) {
-            dispatch(createApplication(user?.uid, newObject))
+            dispatch(createApplication(user?.uid, activeFolder, newObject))
         }
         else {
             dispatch(createLocalApplication(newObject))

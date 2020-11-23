@@ -4,6 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import applicationReducer from './reducers/applicationReducer'
 import userReducer from './reducers/userReducer'
+import folderReducer from './reducers/folderReducer'
+
 
 
 
@@ -11,8 +13,8 @@ import userReducer from './reducers/userReducer'
 
 const reducer = combineReducers({
   applications: applicationReducer,
-  authUser: userReducer
-
+  authUser: userReducer,
+  activeFolder: folderReducer
   //filter: filterReducer
 })
 

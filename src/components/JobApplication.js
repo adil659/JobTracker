@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 
 const JobApplication = () => {
@@ -26,7 +27,7 @@ const JobApplication = () => {
                             
                             <tr key={i}>                                
                                 <td>{i}</td>
-                                <td><a href={`applications/${application.id}`}>{application.company}</a></td>
+                                <td><Link to={`applications/${application.id}`}>{application.company}</Link></td>
                                 <td>{application.position}</td>
                                 <td style={{backgroundColor: application.color}}></td>
                             </tr>

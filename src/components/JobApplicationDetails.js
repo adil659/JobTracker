@@ -14,6 +14,7 @@ import { Button, Container } from 'react-bootstrap'
 const JobApplicationDetails = () => {
     const applications = useSelector(state => state.applications)
     const user = useSelector(state => state.authUser)
+    const activeFolder = useSelector(state => state.activeFolder)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -25,11 +26,11 @@ const JobApplicationDetails = () => {
             ...application,
             applied: !application.applied
         }
-        dispatch(updateApplication(user?.uid, id, updatedApplication))
+        dispatch(updateApplication(user?.uid, activeFolder, id, updatedApplication))
     }
 
     const handleDelete = (event) => {
-        dispatch(removeApplication(id)) 
+        dispatch(removeApplication(user?.uid, activeFolder, id)) 
         history.push('/home')
     }
 

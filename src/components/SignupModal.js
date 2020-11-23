@@ -27,6 +27,10 @@ function SignupModal({ controls }) {
             alert(err.message)
         })
 
+        await db.collection('users').doc(authUser.user.uid).collection('app_folders').add({
+            name: 'General'
+        })
+
         // auth.createUserWithEmailAndPassword(email.value, password.value)
         //     .then((authUser) => {
         //         authUser.user.updateProfile({

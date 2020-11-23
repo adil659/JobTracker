@@ -27,14 +27,14 @@ function SigninModal({ controls }) {
 
     const keyPressed = (event) => {
         console.log(event.charCode)
-        if(event.charCode === 13) {
+        if (event.charCode === 13) {
             signIn()
         }
     }
     return (
         <div onKeyPress={keyPressed}>
 
-            <Modal show={show} onHide={closeModal}  autoFocus={true}>
+            <Modal show={show} onHide={closeModal} autoFocus={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign in</Modal.Title>
                 </Modal.Header>
@@ -56,11 +56,11 @@ function SigninModal({ controls }) {
 
                 </Modal.Body>
                 <Modal.Footer >
-                        <Button variant="secondary" onClick={closeModal}>
-                            Close
+                    <Button variant="secondary" onClick={closeModal}>
+                        Close
                     </Button>
-                        <Button type="submit" variant="primary" onClick={signIn}>
-                            Login
+                    <Button type="submit" variant="primary" onClick={signIn}>
+                        Login
                     </Button>
                 </Modal.Footer>
             </Modal>

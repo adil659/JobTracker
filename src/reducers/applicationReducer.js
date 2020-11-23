@@ -48,10 +48,10 @@ export const fireBaseGetApplications = (applications) => {
     }
 }
 
-export const createApplication = (userId, application) => {
+export const createApplication = (userId, activeFolder, application) => {
     return async dispatch => {
         //const addedApplication = await applicationService.create(application)
-        db.collection('users').doc(userId).collection('jobs').add({
+        db.collection('users').doc(userId).collection('app_folders').doc(activeFolder.id).collection('jobs').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             ...application
         })
@@ -77,10 +77,12 @@ export const createLocalApplication = (application) => {
     }
 }
 
-export const updateApplication = (userId, appId, applicationObject) => {
+export const updateApplication = (userId, activeFolder, appId, applicationObject) => {
     return async dispatch => {
         //const updatedApplication = await applicationService.update(id, applicationObject)
-        db.collection('users').doc(userId).collection('jobs').doc(`/${appId}`).set(applicationObject)
+        db.collection('users').doc(userId)
+        .collection('app_folders').doc(activeFolder.id)
+        .collection('jobs').doc(`/${appId}`).set(applicationObject)
         const updatedApplication = {}
         dispatch({
             type: 'UPDATEe_APPLICATION',
@@ -92,10 +94,12 @@ export const updateApplication = (userId, appId, applicationObject) => {
     }
 }
 
-export const removeApplication = (userId, appId) => {
+export const removeApplication = (userId, activeFolder, appId) => {
     return async dispatch => {
         //const deletedApplication = await applicationService.deleteApplication(id)
-        db.collection('users').doc(userId).collection('jobs').doc(`/${appId}`).delete()
+        db.collection('users').doc(userId)
+        .collection('app_folders').doc(activeFolder.id)
+        .collection('jobs').doc(`/${appId}`).delete()
         //const deletedApplication = {}
         dispatch({
             type: 'DELETE_APPLICATION',

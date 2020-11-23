@@ -17,6 +17,7 @@ import {
 function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.authUser)
+  const activeFolder = useSelector(state => state.activeFolder)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -33,10 +34,14 @@ function App() {
   }, [user, dispatch]);
 
   useEffect(() => {
+    var unsubscribe = null
+    console.log(activeFolder)
     if (user != null) {
-      console.log(user)
-      const unsubscribe = db.collection('users')
+      if(activeFolder.id != null) {
+         unsubscribe = db.collection('users')
         .doc(user?.uid)
+        .collection('app_folders')
+        .doc(activeFolder?.id)
         .collection('jobs')
         .onSnapshot((snapshot) => {
           dispatch(fireBaseGetApplications(snapshot.docs.map(doc => ({
@@ -45,12 +50,15 @@ function App() {
           }))
           ))
         })
+      }
         return () => {
-          unsubscribe()
+          if (unsubscribe != null) {
+              unsubscribe()
+          }
         }
     }
     
-  }, [user, dispatch])
+  }, [user, dispatch, activeFolder])
 
 
   return (

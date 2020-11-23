@@ -3,3 +3,9 @@
     display: flex;
     flex: 1;
 }
+
+.jobsList__folder__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
